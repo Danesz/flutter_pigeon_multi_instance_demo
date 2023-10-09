@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pigeon_multi_instance_demo/nativeview.dart';
 
 void main() {
   runApp(const MyApp());
@@ -105,6 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            const SizedBox(height:100, child: NativeView()),
             const Text(
               'You have pushed the button this many times:',
             ),
