@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:pigeon_multi_instance_demo/pigeon/pigeon_multi_instance_wrapper.dart';
 import 'package:pigeon_multi_instance_demo/pigeon/theoplayer_flutter_api.g.dart';
 
 typedef PlatformViewCreatedCallback = void Function(NativeViewController controller);
@@ -65,10 +66,14 @@ class NativeView extends StatelessWidget {
 }
 
 class NativeViewController implements FlutterTextApiHandler {
-  final NativeTextApi _nativeAPI = NativeTextApi();
+  late final NativeTextApi _nativeAPI;
+  late final PigeonMultiInstanceBinaryMessengerWrapper _pigeonMessenger;
 
   NativeViewController(int id) {
-    FlutterTextApiHandler.setup(this);
+    _pigeonMessenger = PigeonMultiInstanceBinaryMessengerWrapper(suffix: 'id_$id');
+
+    _nativeAPI = NativeTextApi(binaryMessenger: _pigeonMessenger);
+    FlutterTextApiHandler.setup(this, binaryMessenger: _pigeonMessenger);
   }
 
   @override

@@ -15,6 +15,7 @@ class NativeView: NSObject, FlutterPlatformView, NativeTextApi {
     private let _view: UIView
     private let _label: UILabel
     private var _flutterApi: FlutterTextApiHandler
+    private let _pigeonMessenger: PigeonMultiInstanceBinaryMessengerWrapper
 
     init(
         frame: CGRect,
@@ -27,8 +28,8 @@ class NativeView: NSObject, FlutterPlatformView, NativeTextApi {
         _label = UILabel(frame: _view.bounds)
 
         //setup pigeon
-        _flutterApi = FlutterTextApiHandler(binaryMessenger: messenger!)
-
+        _pigeonMessenger = PigeonMultiInstanceBinaryMessengerWrapper(with: messenger!, channelSuffix: "id_\(viewId)")
+        _flutterApi = FlutterTextApiHandler(binaryMessenger: _pigeonMessenger)
         super.init()
 
         // setup views
@@ -42,7 +43,7 @@ class NativeView: NSObject, FlutterPlatformView, NativeTextApi {
 
         _view.addSubview(_label)
         
-        NativeTextApiSetup.setUp(binaryMessenger: messenger!, api: self)
+        NativeTextApiSetup.setUp(binaryMessenger: _pigeonMessenger, api: self)
     }
 
 

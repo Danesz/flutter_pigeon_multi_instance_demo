@@ -11,13 +11,15 @@ import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.platform.PlatformView
 import com.danieldallos.pigeon_multi_instance_demo.pigeon.NativeTextApi
 import com.danieldallos.pigeon_multi_instance_demo.pigeon.FlutterTextApiHandler
+import com.danieldallos.pigeon_multi_instance_demo.pigeon.PigeonMultiInstanceBinaryMessengerWrapper
 
 class NativeView(context: Context, viewId: Int, args: Any?, messenger: BinaryMessenger) : PlatformView, NativeTextApi {
 
     private val textView: TextView
     private val wrapper: LinearLayout
 
-    private val flutterApi: FlutterTextApiHandler;
+    private val flutterApi: FlutterTextApiHandler
+    private val pigeonMessenger: PigeonMultiInstanceBinaryMessengerWrapper
 
     init {
 
@@ -36,8 +38,10 @@ class NativeView(context: Context, viewId: Int, args: Any?, messenger: BinaryMes
         wrapper.addView(textView)
 
         //setup pigeon
-        NativeTextApi.setUp(messenger, this)
-        flutterApi = FlutterTextApiHandler(messenger)
+        pigeonMessenger = PigeonMultiInstanceBinaryMessengerWrapper(messenger, "id_$viewId");
+
+        NativeTextApi.setUp(pigeonMessenger, this)
+        flutterApi = FlutterTextApiHandler(pigeonMessenger)
 
     }
 
