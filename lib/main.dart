@@ -58,7 +58,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
-  NativeViewController? _nativeViewController;
+  NativeViewController? _nativeViewController1;
+  NativeViewController? _nativeViewController2;
+
 
   void _incrementCounter() {
     setState(() {
@@ -68,7 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
-      _nativeViewController?.changeText("$_counter");
+      _nativeViewController1?.changeText("$_counter");
+      _nativeViewController2?.changeText("$_counter");
     });
   }
 
@@ -110,7 +113,10 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             SizedBox(height:100, child: NativeView(platformViewCreatedCallback: (controller){
-              _nativeViewController = controller;
+              _nativeViewController1 = controller;
+            },)),
+            SizedBox(height:100, child: NativeView(platformViewCreatedCallback: (controller){
+              _nativeViewController2 = controller;
             },)),
             const Text(
               'You have pushed the button this many times:',
