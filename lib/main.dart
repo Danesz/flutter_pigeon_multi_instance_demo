@@ -58,6 +58,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
+  NativeViewController? _nativeViewController;
+
   void _incrementCounter() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
@@ -66,6 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
       _counter++;
+      _nativeViewController?.changeText("$_counter");
     });
   }
 
@@ -106,7 +109,9 @@ class _MyHomePageState extends State<MyHomePage> {
           // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const SizedBox(height:100, child: NativeView()),
+            SizedBox(height:100, child: NativeView(platformViewCreatedCallback: (controller){
+              _nativeViewController = controller;
+            },)),
             const Text(
               'You have pushed the button this many times:',
             ),

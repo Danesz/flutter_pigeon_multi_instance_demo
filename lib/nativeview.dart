@@ -3,9 +3,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:pigeon_multi_instance_demo/pigeon/theoplayer_flutter_api.g.dart';
+
+typedef PlatformViewCreatedCallback = void Function(NativeViewController controller);
 
 class NativeView extends StatelessWidget {
-  const NativeView({super.key});
+  PlatformViewCreatedCallback platformViewCreatedCallback;
+
+  NativeView({super.key, required this.platformViewCreatedCallback});
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +44,7 @@ class NativeView extends StatelessWidget {
             )
               ..addOnPlatformViewCreatedListener((id) {
                 params.onPlatformViewCreated(id);
+                platformViewCreatedCallback(NativeViewController(id));
               })
               ..create();
           },
@@ -49,9 +55,28 @@ class NativeView extends StatelessWidget {
             layoutDirection: TextDirection.ltr,
             creationParams: creationParams,
             creationParamsCodec: const StandardMessageCodec(),
-            onPlatformViewCreated: (id) {});
+            onPlatformViewCreated: (id) {
+              platformViewCreatedCallback(NativeViewController(id));
+            });
       default:
         return Text("Unsupported platform $defaultTargetPlatform");
     }
+  }
+}
+
+class NativeViewController implements FlutterTextApiHandler {
+  final NativeTextApi _nativeAPI = NativeTextApi();
+
+  NativeViewController(int id) {
+    FlutterTextApiHandler.setup(this);
+  }
+
+  @override
+  void textChanged(String text) {
+    print("textChanged: $text");
+  }
+
+  void changeText(String newText) {
+    _nativeAPI.setText(newText);
   }
 }
