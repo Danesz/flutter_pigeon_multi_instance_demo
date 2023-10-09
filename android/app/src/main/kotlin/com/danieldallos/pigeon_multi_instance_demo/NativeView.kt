@@ -9,12 +9,15 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.platform.PlatformView
+import com.danieldallos.pigeon_multi_instance_demo.pigeon.NativeTextApi
+import com.danieldallos.pigeon_multi_instance_demo.pigeon.FlutterTextApiHandler
 
-
-class NativeView(context: Context, viewId: Int, args: Any?, messenger: BinaryMessenger) : PlatformView {
+class NativeView(context: Context, viewId: Int, args: Any?, messenger: BinaryMessenger) : PlatformView, NativeTextApi {
 
     private val textView: TextView
     private val wrapper: LinearLayout
+
+    private val flutterApi: FlutterTextApiHandler;
 
     init {
 
@@ -28,9 +31,14 @@ class NativeView(context: Context, viewId: Int, args: Any?, messenger: BinaryMes
         wrapper.gravity = Gravity.CENTER
 
         textView = TextView(context)
-        textView.text = "NativeView_$viewId";
+        textView.text = "NativeView_$viewId"
 
         wrapper.addView(textView)
+
+        //setup pigeon
+        NativeTextApi.setUp(messenger, this)
+        flutterApi = FlutterTextApiHandler(messenger)
+
     }
 
 
@@ -40,6 +48,13 @@ class NativeView(context: Context, viewId: Int, args: Any?, messenger: BinaryMes
 
     override fun dispose() {
         //TODO("Not yet implemented")
+    }
+
+    //pigeon API
+    override fun setText(text: String) {
+        val finalText = "NativeView_$text"
+        textView.text = finalText;
+        flutterApi.textChanged(finalText, {})
     }
 
 
