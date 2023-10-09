@@ -10,10 +10,11 @@ import Flutter
 import UIKit
 import SwiftUI
 
-class NativeView: NSObject, FlutterPlatformView {
+class NativeView: NSObject, FlutterPlatformView, NativeTextApi {
 
     private let _view: UIView
     private let _label: UILabel
+    private var _flutterApi: FlutterTextApiHandler
 
     init(
         frame: CGRect,
@@ -24,6 +25,9 @@ class NativeView: NSObject, FlutterPlatformView {
         _view = UIView()
         _view.frame = frame
         _label = UILabel(frame: _view.bounds)
+
+        //setup pigeon
+        _flutterApi = FlutterTextApiHandler(binaryMessenger: messenger!)
 
         super.init()
 
@@ -37,11 +41,19 @@ class NativeView: NSObject, FlutterPlatformView {
         _label.text = "NativeView_\(viewId)"
 
         _view.addSubview(_label)
+        
+        NativeTextApiSetup.setUp(binaryMessenger: messenger!, api: self)
     }
 
 
     func view() -> UIView {
         return _view
+    }
+    
+    func setText(text: String) throws {
+        let finalText = "NativeView_\(text)"
+        _label.text = finalText
+        _flutterApi.textChanged(text: finalText, completion: {})
     }
 
 }

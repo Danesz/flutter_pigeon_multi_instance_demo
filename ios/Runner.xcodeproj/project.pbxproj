@@ -12,6 +12,8 @@
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		652324532AD4A20900672BA3 /* NativeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652324522AD4A20900672BA3 /* NativeView.swift */; };
 		652324552AD4A32300672BA3 /* NativeViewFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652324542AD4A32300672BA3 /* NativeViewFactory.swift */; };
+		652324592AD4B13300672BA3 /* TextApi.g.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652324572AD4B13300672BA3 /* TextApi.g.swift */; };
+		6523245A2AD4B13300672BA3 /* TextApi.g.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652324582AD4B13300672BA3 /* TextApi.g.swift */; };
 		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
@@ -49,6 +51,8 @@
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		652324522AD4A20900672BA3 /* NativeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeView.swift; sourceTree = "<group>"; };
 		652324542AD4A32300672BA3 /* NativeViewFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeViewFactory.swift; sourceTree = "<group>"; };
+		652324572AD4B13300672BA3 /* TextApi.g.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextApi.g.swift; sourceTree = "<group>"; };
+		652324582AD4B13300672BA3 /* TextApi.g.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextApi.g.swift; path = pigeon/TextApi.g.swift; sourceTree = "<group>"; };
 		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
 		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
@@ -78,6 +82,14 @@
 				331C807B294A618700263BE5 /* RunnerTests.swift */,
 			);
 			path = RunnerTests;
+			sourceTree = "<group>";
+		};
+		652324562AD4B13300672BA3 /* pigeon */ = {
+			isa = PBXGroup;
+			children = (
+				652324572AD4B13300672BA3 /* TextApi.g.swift */,
+			);
+			path = pigeon;
 			sourceTree = "<group>";
 		};
 		9740EEB11CF90186004384FC /* Flutter */ = {
@@ -113,6 +125,8 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				652324562AD4B13300672BA3 /* pigeon */,
+				652324582AD4B13300672BA3 /* TextApi.g.swift */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
 				97C146FD1CF9000F007C117D /* Assets.xcassets */,
 				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
@@ -274,7 +288,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6523245A2AD4B13300672BA3 /* TextApi.g.swift in Sources */,
 				652324552AD4A32300672BA3 /* NativeViewFactory.swift in Sources */,
+				652324592AD4B13300672BA3 /* TextApi.g.swift in Sources */,
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 				652324532AD4A20900672BA3 /* NativeView.swift in Sources */,
