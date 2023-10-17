@@ -2,6 +2,9 @@
 
 Flutter Pigeon demo with multiple instance support
 
+Demo project for article: [Flutter Pigeon — Support Multiple instance APIs](https://medium.com/@danieldallos/flutter-pigeon-support-multiple-instance-apis-9b1342483d5b?source=friends_link&sk=9983bfd9db42ddc35330f06cf9d4b432)
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
